@@ -1,4 +1,4 @@
-export default function calculateCompatibility(teamAttributeAverages, will) {
+export default function calculateCompatibility(teamAttributeAverages, will) { // calculateCompatibilityForMember
 
     console.log("----will---");
     console.log(will);
@@ -55,3 +55,6 @@ export default function calculateCompatibility(teamAttributeAverages, will) {
     // return normalizedCompatibilityScore;
 };
 
+function calculateCompatibilityPerAttribute(){
+    return null;
+}
