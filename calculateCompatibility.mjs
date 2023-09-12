@@ -1,3 +1,42 @@
+/*
+
+main --> {
+    calculateCompatibilityForAllCandidates(teamAvgAttributes, candidates){
+
+        arr = [];
+
+        for( const candidate in candidates){
+            candidate obj = calculateCompScorePerCandidate(candidate, teamAvgAttributes)
+            push.arr(obj)
+        }
+
+        return arr
+    }
+}
+
+-----> back to main main
+    const results = {
+        "scoredApplicants" : arr
+    }
+
+    return results?
+
+
+secondary --> 
+    calculateCompScore {
+        -- the function I have below here.. and in calcualteCompatibiltiy2.mjs
+        -- returns obj = { 
+                "name" : "name",
+                "score" : score
+            }
+    }
+*/
+
+
+
+
+
+
 export default function calculateCompatibility(teamAttributeAverages, will) { // calculateCompatibilityForMember
 
     console.log("----will---");
