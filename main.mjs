@@ -7,8 +7,7 @@ function processInput(input){
 
     const team = input.team;
     const teamAttributeAverages = calculateTeamAttributeAverages(team);
-    console.log("----teamattributeaverages---");
-    console.log(teamAttributeAverages);
+
 }
 
 processInput(input);
