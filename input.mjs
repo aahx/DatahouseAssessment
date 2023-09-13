@@ -35,6 +35,22 @@ const input = {
                 "endurance": 2,
                 "spicyFoodTolerance": 5,
             }
+        }, {
+            "name" : "Jane",
+            "attributes" : {
+                "intelligence": 7,
+                "strength": 4,
+                "endurance": 3,
+                "spicyFoodTolerance": 2,
+            }
+        }, {
+            "name" : "Joe",
+            "attributes" : {
+                "intelligence": 1,
+                "strength": 1,
+                "endurance": 1,
+                "spicyFoodTolerance": 10,
+            }
         }
     ]
 };
@@ -42,30 +58,3 @@ const input = {
 export default input;
 
 
-// "applicants" : [
-//     {
-//         "name" : "John",
-//         "attributes" : {
-//             "intelligence": 4,
-//             "strength": 5,
-//             "endurance": 2,
-//             "spicyFoodTolerance": 5,
-//         }
-//     }, {
-//         "name" : "Jane",
-//         "attributes" : {
-//             "intelligence": 7,
-//             "strength": 4,
-//             "endurance": 3,
-//             "spicyFoodTolerance": 2,
-//         }
-//     }, {
-//         "name" : "Joe",
-//         "attributes" : {
-//             "intelligence": 1,
-//             "strength": 1,
-//             "endurance": 1,
-//             "spicyFoodTolerance": 10,
-//         }
-//     }
-// ]
