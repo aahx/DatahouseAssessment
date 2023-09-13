@@ -1,3 +1,5 @@
+import attributeWeights from "./attributeWeights.mjs";
+
 /*
 
 main --> {
@@ -33,23 +35,22 @@ secondary -->
 */
 
 export function compatibilityCalculator(teamAvgAttrs, applicants) {
-    console.log("---teamAvgAttrs---")
-    console.log(teamAvgAttrs);
-
-    console.log("---applicants---");
-    console.log(applicants);
-
     let result = [];
+    
+    // Looping through each applicant to calculate score obj and pushing to result
+    for (const applicant of applicants) {
+        // console.log("---inner---");
+        // console.log(applicant);
+        
+        const applicantScore = calculateApplicantCompatibility(teamAvgAttrs, applicant);
 
-    for (const applicant in applicants) {
-        const applicantScore = calculateApplicantCompatibility(teamAvgAttrs, applicants);
-        result.push(applicantScore);
-        console.log("---in-loop result---");
-        console.log(result);
+        // result.push(applicantScore);
+        // console.log("---in-loop result---");
+        // console.log(result);
     }
 
-    console.log("--- final result --- ");
-    console.log(result);
+    // console.log("--- final result --- ");
+    // console.log(result);
 }
 
 
@@ -126,38 +127,43 @@ function calculateCompatibilityPerAttribute() {
     'a' : 'applicants'
 */
 function calculateApplicantCompatibility(t, a) {
-    let overallCompatibilityPoints = 0; // will divide by number of attributes later to get score
-    let numberOfAttributes = a.attributes.length; // will this work?
-
+    let overallCompatibilityPoints = 0; // Will take average to calculate final score
+    let numberOfAttributes = 0;
+    
+    // Loop through the applicant's attributes to calculate compatibility points.
     for (const attr in a.attributes) {
-        // This formula calculates a desirability value of an applicant's attribute based on the average value of the attribute for the team 
-        // It is set to return 0.5 when applicants attribute is equal to the team's average attribute value and varies from there.
-        let attrCompVal = 0.5 * ((t.attr + (a.attr - t.attr)) / t.attr)
+        const aAttrValue = a.attributes[attr]; // Checking for existance of attribute
+        const baseValue = 0.5;
+        const maxValue = 1;
+        const minValue = 0;
 
-        // Some attributes are more desirable, we created a weight system
-        // spictyFoodTolerance is not so important
-        // but intelligenec is more important
-        if (attrCompVal > 0.5) {
-            attrCompVal *= (1 + attrWeight[attr]); // multiplying by weight
-
-            // limit maximum points for an to 1
-            Math.min(attrCompVal, 1);
-        } else if (attrCompVal < 0.5) {
-            attrCompVal *= (1 - attrWeight[atrr]);
-
-            // limit minimum points for an attribute to 0
-            Math.max(attrCompVal, 0);
+        // Calculate the compatibility value of an applicant's attribute based on the team's average attribute value.
+        // The formula returns 0.5 when the applicant's attribute is equal to the team's average, varying from there.
+        let attrCompVal = baseValue * ((t[attr] + (aAttrValue - t[attr])) / t[attr]);        
+        
+        /*
+            Some attributes are more desirable; we've implemented a weighted system.
+            The attributeWeights object is imported from "./attributeWeights.mjs".
+        */
+        if (attrCompVal > baseValue) {
+            attrCompVal *= (1 + attributeWeights[attr]);
+            attrCompVal = Math.min(attrCompVal, maxValue); // Limit the maximum points for an attribute to 1.
+        } else if (attrCompVal < baseValue) {
+            attrCompVal *= (1 - attributeWeights[attr]);            
+            attrCompVal = Math.max(attrCompVal, minValue); // Limit the minimum points for an attribute to 0.
         }
-
-        // numberOfAttributes++; // keeping track of number of attributes
+        
+        overallCompatibilityPoints += attrCompVal // Adding to overall points
+        numberOfAttributes++; // Counting number of attributes
     }
-
-    const score = parseFloat(overallCompatibilityPoints / numberOfAttributes).toFixed(1);
+    
+    const score = parseFloat((overallCompatibilityPoints / numberOfAttributes).toFixed(2));
 
     const result = {
-        "name" : a.name,
-        "score" : score,
+        name : a.name,
+        score : score,
     }
     console.log(result);
     return result;
+
 }

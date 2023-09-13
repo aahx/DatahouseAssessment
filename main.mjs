@@ -17,7 +17,7 @@ const will = {
 
 
 
-function processInput(input){
+function processInput(input) {
     // Checking Input
     // console.log(JSON.stringify(input, null, 2));
 
