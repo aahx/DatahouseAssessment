@@ -42,10 +42,8 @@ function calculateApplicantCompatibility(t, a) {
         // The formula returns 0.5 when the applicant's attribute is equal to the team's average, varying from there.
         let attrCompVal = baseValue * ((t[attr] + (aAttrValue - t[attr])) / t[attr]);        
         
-        /*
-            Some attributes are more desirable; we've implemented a weighted system.
-            The attributeWeights object is imported from "./attributeWeights.mjs".
-        */
+
+        // Some attributes are more desirable; we've implemented a weighted system.        
         if (attrCompVal > baseValue) {
             attrCompVal *= (1 + attributeWeights[attr]);
             attrCompVal = Math.min(attrCompVal, maxValue); // Limit the maximum points for an attribute to 1.
