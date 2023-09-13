@@ -1,7 +1,7 @@
 import input from "./input.mjs";
 
 import calculateTeamAttributeAverages from "./calculateTeamAttributeAverages.mjs";
-import calculateCompatibility from "./calculateCompatibility.mjs";
+import { compatibilityCalculator } from "./calculateCompatibility.mjs";
 
 
 // Will's attributes
@@ -18,13 +18,18 @@ const will = {
 
 
 function processInput(input){
-    console.log(JSON.stringify(input, null, 2));
+    // Checking Input
+    // console.log(JSON.stringify(input, null, 2));
 
-    // const t = input.team;
-    // const avgAttrs = calculateTeamAttributeAverages(t);
-    
+    // Variables
+    const t = input.team;
+    const a = input.applicants;
 
-    // calculateCompatibility(avgAttrs, will)
+    // Step 1: Calculating the average of each attribute for current team(t)
+    const avgAttrs = calculateTeamAttributeAverages(t);
+
+    // Step 2: Compatibility Calculator - takes in team average and applicants - outputs results
+    compatibilityCalculator(avgAttrs, a);
 
 
 }

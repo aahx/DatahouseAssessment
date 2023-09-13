@@ -32,12 +32,30 @@ secondary -->
     }
 */
 
+export function compatibilityCalculator(teamAvgAttrs, applicants){
+    console.log("---teamAvgAttrs---")
+    console.log(teamAvgAttrs);
+
+    console.log("---applicants---");
+    console.log(applicants);
+
+    let result = [];
+
+    for (const applicant in applicants){
+        const applicantScore = calculateApplicantCompatibility(teamAvgAttrs, applicants);
+        result.push(applicantScore);
+        console.log("---in-loop result---");
+        console.log(result);
+    }
+
+    console.log("--- final result --- ");
+    console.log(result);
+}
 
 
 
 
-
-export default function calculateCompatibility(teamAttributeAverages, will) { // calculateCompatibilityForMember
+function calculateApplicantCompatibility2(teamAttributeAverages, will) { // calculateCompatibilityForMember
 
     console.log("----will---");
     console.log(will);
@@ -55,6 +73,10 @@ export default function calculateCompatibility(teamAttributeAverages, will) { //
     // It is set to be 0.5 when Will's intelligence matches the team's average and varies from there.
     // overall:
     const intCompatibilityVal = 0.5 * ((teamAttributeAverages.intelligence + (will.attributes.intelligence - teamAttributeAverages.intelligence))/ teamAttributeAverages.intelligence);
+    // EXTRA
+    // const intCompatibilityVal = 0.5 * 
+    // FOR [[ ((teamAttributeAverages.intelligence + (will.attributes.intelligence - teamAttributeAverages.intelligence)) ]]  - set Math.max = 10 and Math.min = 0
+    // / teamAttributeAverages.intelligence);
     
     console.log("intCompatibilityVal", intCompatibilityVal);
 
