@@ -1,6 +1,6 @@
 const attributeWeights = {
-    "intelligence": .20,
-    "strength": .02,
+    "intelligence": .60,
+    "strength": .25,
     "endurance": .10,
     "spicyFoodTolerance": 0,
 };

@@ -1,7 +1,7 @@
 import input from "./input.mjs";
 
 import calculateTeamAttributeAverages from "./calculateTeamAttributeAverages.mjs";
-import { compatibilityCalculator } from "./calculateCompatibility.mjs";
+import compatibilityCalculator from "./calculateCompatibility.mjs";
 
 
 // Will's attributes

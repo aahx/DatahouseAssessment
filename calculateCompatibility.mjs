@@ -1,10 +1,15 @@
 import attributeWeights from "./attributeWeights.mjs";
 
-
-export function compatibilityCalculator(teamAvgAttrs, applicants) {
+/**
+ * Calculates compatibility scores for a list of applicants based on team average attributes.
+ * @param {Object} teamAvgAttrs - Team's average attribute values.
+ * @param {Array} applicants - List of applicant objects.
+ * @returns {Array} - List of compatibility scores for each applicant.
+ */
+export default function compatibilityCalculator(teamAvgAttrs, applicants) {
     let result = [];
     
-    // Looping through each applicant to calculate score obj and pushing to result
+    // Loop through each applicant to calculate their compatibility score and add it to the result array.
     for (const applicant of applicants) {        
         const applicantScore = calculateApplicantCompatibility(teamAvgAttrs, applicant);
         result.push(applicantScore);
@@ -12,12 +17,19 @@ export function compatibilityCalculator(teamAvgAttrs, applicants) {
 
     console.log("--- final result --- ");
     console.log(result);
+
+    return result;
 }
 
-/*
-    't' : 'teamAvgAttrs'
-    'a' : 'applicants'
-*/
+
+
+/**
+ * Calculate the compatibility score for an applicant based on team average attributes.
+ * @param {Object} teamAvgAttrs - Team's average attribute values.
+ * @param {Object} applicant - Applicant's attributes.
+ * @param {Object} attributeWeights - Weights for each attribute.
+ * @returns {Object} - Compatibility score for the applicant.
+ */
 function calculateApplicantCompatibility(t, a) {
     let overallCompatibilityPoints = 0; // Will take average to calculate final score
     let numberOfAttributes = 0;
