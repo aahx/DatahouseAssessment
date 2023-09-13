@@ -1,37 +1,28 @@
-import input from "./input.mjs";
-
-import calculateTeamAttributeAverages from "./calculateTeamAttributeAverages.mjs";
-import compatibilityCalculator from "./calculateCompatibility.mjs";
-
-
-// Will's attributes
-const will = {
-    attributes: {
-        intelligence: 3,
-        strength: 2,
-        endurance: 9,
-        spictyFoodTolerance: 9,
-    },
-};
+import input from "./data/input.mjs";
+import calculateTeamAttributeAverages from "./calculations/calculateTeamAttributeAverages.mjs";
+import compatibilityCalculator from "./calculations/compatibilityCalculator.mjs";
 
 
-
-
+/**
+ * Process the input data to calculate compatibility scores for applicants.
+ * @param {Object} input - Input data containing team and applicants information.
+ * @returns {Object} - Result containing compatibility scores for applicants.
+ */
 function processInput(input) {
-    // Checking Input
-    // console.log(JSON.stringify(input, null, 2));
+    const t = input.team; // Team data
+    const a = input.applicants; // List of applicants
 
-    // Variables
-    const t = input.team;
-    const a = input.applicants;
-
-    // Step 1: Calculating the average of each attribute for current team(t)
+    // Step 1: Calculate the average of each attribute for the current team (t)
     const avgAttrs = calculateTeamAttributeAverages(t);
 
-    // Step 2: Compatibility Calculator - takes in team average and applicants - outputs results
-    compatibilityCalculator(avgAttrs, a);
+    // Step 2: Calculate compatibility scores for each applicant
+    const result = compatibilityCalculator(avgAttrs, a);
 
-
+    // Return the compatibility scores for the applicants
+    return {
+        scoredApplicants: result
+    }
 }
 
-processInput(input);
+const result = processInput(input);
+console.log(result);

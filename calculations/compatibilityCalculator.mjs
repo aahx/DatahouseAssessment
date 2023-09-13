@@ -15,9 +15,6 @@ export default function compatibilityCalculator(teamAvgAttrs, applicants) {
         result.push(applicantScore);
     }
 
-    console.log("--- final result --- ");
-    console.log(result);
-
     return result;
 }
 
