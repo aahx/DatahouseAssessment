@@ -32,7 +32,7 @@ secondary -->
     }
 */
 
-export function compatibilityCalculator(teamAvgAttrs, applicants){
+export function compatibilityCalculator(teamAvgAttrs, applicants) {
     console.log("---teamAvgAttrs---")
     console.log(teamAvgAttrs);
 
@@ -41,7 +41,7 @@ export function compatibilityCalculator(teamAvgAttrs, applicants){
 
     let result = [];
 
-    for (const applicant in applicants){
+    for (const applicant in applicants) {
         const applicantScore = calculateApplicantCompatibility(teamAvgAttrs, applicants);
         result.push(applicantScore);
         console.log("---in-loop result---");
@@ -72,32 +72,32 @@ function calculateApplicantCompatibility2(teamAttributeAverages, will) { // calc
     // This formula calculates the compatibility value for Will's intelligence based on the team's average intelligence.
     // It is set to be 0.5 when Will's intelligence matches the team's average and varies from there.
     // overall:
-    const intCompatibilityVal = 0.5 * ((teamAttributeAverages.intelligence + (will.attributes.intelligence - teamAttributeAverages.intelligence))/ teamAttributeAverages.intelligence);
+    const intCompatibilityVal = 0.5 * ((teamAttributeAverages.intelligence + (will.attributes.intelligence - teamAttributeAverages.intelligence)) / teamAttributeAverages.intelligence);
     // EXTRA
     // const intCompatibilityVal = 0.5 * 
     // FOR [[ ((teamAttributeAverages.intelligence + (will.attributes.intelligence - teamAttributeAverages.intelligence)) ]]  - set Math.max = 10 and Math.min = 0
     // / teamAttributeAverages.intelligence);
-    
+
     console.log("intCompatibilityVal", intCompatibilityVal);
 
 
     let weightedIntVal = intCompatibilityVal;
-    if( intCompatibilityVal > 0.5){
+    if (intCompatibilityVal > 0.5) {
         weightedIntVal *= 1.05
-        
+
         // limit weight to maximum of 1.0
-        if (weightedIntVal > 1.0){
+        if (weightedIntVal > 1.0) {
             weightedIntVal = 1.0
         }
-    } else if( intCompatibilityVal < 0.5){
+    } else if (intCompatibilityVal < 0.5) {
         weightedIntVal *= .95
         // limit weight to minimum of 0.0
-          if (weightedIntVal < 0.0){
+        if (weightedIntVal < 0.0) {
             weightedIntVal = 0.0
         }
     }
     console.log("weightedIntVal", weightedIntVal);
-    
+
 
 
 
@@ -116,6 +116,48 @@ function calculateApplicantCompatibility2(teamAttributeAverages, will) { // calc
     // return normalizedCompatibilityScore;
 };
 
-function calculateCompatibilityPerAttribute(){
+function calculateCompatibilityPerAttribute() {
     return null;
+}
+
+
+/*
+    't' : 'teamAvgAttrs'
+    'a' : 'applicants'
+*/
+function calculateApplicantCompatibility(t, a) {
+    let overallCompatibilityPoints = 0; // will divide by number of attributes later to get score
+    let numberOfAttributes = a.attributes.length; // will this work?
+
+    for (const attr in a.attributes) {
+        // This formula calculates a desirability value of an applicant's attribute based on the average value of the attribute for the team 
+        // It is set to return 0.5 when applicants attribute is equal to the team's average attribute value and varies from there.
+        let attrCompVal = 0.5 * ((t.attr + (a.attr - t.attr)) / t.attr)
+
+        // Some attributes are more desirable, we created a weight system
+        // spictyFoodTolerance is not so important
+        // but intelligenec is more important
+        if (attrCompVal > 0.5) {
+            attrCompVal *= (1 + attrWeight[attr]); // multiplying by weight
+
+            // limit maximum points for an to 1
+            Math.min(attrCompVal, 1);
+        } else if (attrCompVal < 0.5) {
+            attrCompVal *= (1 - attrWeight[atrr]);
+
+            // limit minimum points for an attribute to 0
+            Math.max(attrCompVal, 0);
+        }
+
+        // numberOfAttributes++; // keeping track of number of attributes
+    }
+
+    const score = parseFloat(overallCompatibilityPoints / numberOfAttributes).toFixed(1);
+
+    const result = {
+        "name" : a.name,
+        "score" : score,
+    }
+    console.log(result);
+    return result;
 }
